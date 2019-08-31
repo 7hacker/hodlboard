@@ -21,15 +21,16 @@
 }
 
 .sort-container {
-  width: 200px;
+  width: 100px;
   display: flex;
   margin-top: 20px;
+  margin-bottom: 20px;
   justify-content:space-between;
-  border: 1px solid #F00;
+  /*border: 1px solid #F00;*/
 }
 
 .brand {
-  border: 1px solid #0ff;
+  /*border: 1px solid #0ff;*/
   display: flex;
   flex-direction: column;
 }
