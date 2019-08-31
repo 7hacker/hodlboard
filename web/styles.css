@@ -17,7 +17,6 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  /*border: 1px solid #F00;*/
 }
 
 .sort-container {
@@ -26,11 +25,41 @@
   margin-top: 20px;
   margin-bottom: 20px;
   justify-content:space-between;
-  /*border: 1px solid #F00;*/
+}
+
+.card-container {
+  width: 300px;
+  height: 300px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #F00;
+
+}
+
+.card-header {
+  border: 1px solid #F37;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-header-hold {
+  /*border: 1px solid #F70;*/
+  display: flex;
+}
+
+.card-logo {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.card-content {
+  display: flex;
+  width: 300px;
 }
 
 .brand {
-  /*border: 1px solid #0ff;*/
   display: flex;
   flex-direction: column;
 }
@@ -38,11 +67,9 @@
 .button {
   border: 1px solid #064;
   border-radius: 4px;
-  /*background-color: #064;*/
 }
 
 .navlinks {
-    /*border: 1px solid #f0f;*/
     flex-direction: column;
     display: flex;
     justify-content:space-between;
