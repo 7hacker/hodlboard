@@ -19,28 +19,31 @@
   flex-direction: row;
 }
 
-.sort-container {
-  width: 100px;
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  justify-content:space-between;
+.content {
+    margin-top: 20px;
+    display: flex;
+    border: 1px solid #00ff43;
+    flex-wrap: wrap;
 }
 
 .card-container {
-  width: 300px;
-  height: 300px;
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  border: 1px solid #F00;
-
+    width: 300px;
+    height: 300px;
+    box-sizing: border-box;
+    display: flex;
+    border: 1px solid #6200ff;
+    flex-wrap: wrap;
+    margin-right: 50px;
+    margin-bottom: 50px;
 }
 
 .card-header {
-  border: 1px solid #F37;
-  display: flex;
-  justify-content: space-between;
+    border: 1px solid #e617ff;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
 }
 
 .card-header-hold {
@@ -51,12 +54,12 @@
 .card-logo {
   display: flex;
   flex-direction: column;
-
 }
 
 .card-content {
-  display: flex;
-  width: 300px;
+    display: flex;
+    height: 250px;
+    width: 300px;
 }
 
 .brand {
@@ -64,10 +67,6 @@
   flex-direction: column;
 }
 
-.button {
-  border: 1px solid #064;
-  border-radius: 4px;
-}
 
 .navlinks {
     flex-direction: column;
