@@ -24,23 +24,24 @@
     display: flex;
     border: 1px solid #00ff43;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .card-container {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     box-sizing: border-box;
     display: flex;
     border: 1px solid #6200ff;
     flex-wrap: wrap;
-    margin-right: 50px;
-    margin-bottom: 50px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .card-header {
     border: 1px solid #e617ff;
     height: 50px;
-    width: 300px;
+    width: 250px;
     display: flex;
     box-sizing: border-box;
     justify-content: space-between;
@@ -86,7 +87,7 @@
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
   .page {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
   }
 }
