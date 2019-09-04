@@ -34,8 +34,13 @@
     display: flex;
     border: 1px solid #6200ff;
     flex-wrap: wrap;
-    margin-right: 20px;
     margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.content::after {
+  flex: auto;
+  content:"";
 }
 
 .card-header {
