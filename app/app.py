@@ -17,8 +17,11 @@ def home():
 		'crypto': "btc",
 		'amt': 100
 	}
+	r = []
+	for i in range(13):
+		r.append(data)
 	response = app.response_class(
-		response=json.dumps(data),
+		response=json.dumps(r),
 		status=200,
 		mimetype='application/json'
 	)
