@@ -2,16 +2,18 @@
 var request = new XMLHttpRequest()
 
 // Open a new connection, using the GET request on the URL endpoint
-request.open('GET', 'http://localhost:8080/', true)
+request.open('GET', 'http://localhost:8080/content', true)
 
 request.onload = function () {
   // Begin accessing JSON data here
   var data = JSON.parse(this.response)
+  console.log(data)
 
   if (request.status >= 200 && request.status < 400) {
-    data.forEach(content => {
-      console.log(content.msg)
-    })
+    for (var k in data) {
+      console.log("Key:" + k);
+      console.log("Value:" + data[k]);
+    }
   } else {
     console.log('error')
   }

@@ -9,7 +9,7 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/content')
 def home():
 	data = {
 		'msg': "this is a message text",
@@ -22,6 +22,8 @@ def home():
 		status=200,
 		mimetype='application/json'
 	)
+	response.headers['Access-Control-Allow-Origin'] = '*'
+
 	return response
 
 if __name__ == '__main__':
