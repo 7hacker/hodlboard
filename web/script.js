@@ -11,7 +11,7 @@ request.onload = function () {
 
   if (request.status >= 200 && request.status < 400) {
     data.forEach(card => {
-      const app = document.getElementById('content')
+      const app = document.getElementById('content-row')
       const container = document.createElement('div')
       container.setAttribute('class', 'card-container')
       //Card header
