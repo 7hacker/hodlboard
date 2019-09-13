@@ -38,6 +38,9 @@
     margin-right: 20px;
 }
 
+/*Required to align boxes properly. See:
+https://stackoverflow.com/questions/16377972/how-to-align-left-last-row-line-in-multiple-line-flexbox
+*/
 .filling-empty-space-childs {
     width:250px; /*the width of the images in this example*/
     height:0px; /*Important! for the divs to collapse should they fall in a new row*/
