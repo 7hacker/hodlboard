@@ -42,8 +42,6 @@ request.onload = function () {
     //   console.log("Value:" + data[k]);
     // }
 
-
-
   } else {
     console.log('error')
   }
