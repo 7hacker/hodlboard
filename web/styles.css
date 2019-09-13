@@ -20,43 +20,16 @@
 }
 
 .content {
-  margin: 0 auto;
-}
-
-.content-row {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-}
-
-.card-container {
-  height: 250px;
-  width: 250px;
-  flex-basis: 20%;
-  -ms-flex: auto;
-  position: relative;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #00ff43;
-
-}
-/*
-.content {
     margin-top: 20px;
     border: 1px solid #00ff43;
     display: flex;
-    flex-wrap: row wrap;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
-
 
 .card-container {
     width: 250px;
     height: 250px;
-    flex-basis: 20%;
-    -ms-flex: auto;
-    position: relative;
-
     box-sizing: border-box;
     display: flex;
     border: 1px solid #6200ff;
@@ -65,11 +38,12 @@
     margin-right: 20px;
 }
 
-
-.content::after {
-  flex: auto;
-  content:"";
-}*/
+.filling-empty-space-childs {
+    width:250px; /*the width of the images in this example*/
+    height:0px; /*Important! for the divs to collapse should they fall in a new row*/
+    margin-right: 20px;
+    box-sizing: border-box;
+}
 
 .card-header {
     /*border: 1px solid #e617ff;*/

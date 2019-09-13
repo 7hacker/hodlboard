@@ -11,7 +11,7 @@ request.onload = function () {
 
   if (request.status >= 200 && request.status < 400) {
     data.forEach(card => {
-      const app = document.getElementById('content-row')
+      const app = document.getElementById('content')
       const container = document.createElement('div')
       container.setAttribute('class', 'card-container')
       //Card header
@@ -31,6 +31,12 @@ request.onload = function () {
       container.appendChild(card_content)
       app.appendChild(container)
     })
+    for (var i = 0; i < 10; i++) {
+      const app = document.getElementById('content')
+      const container = document.createElement('div')
+      container.setAttribute('class', 'filling-empty-space-childs')
+      app.appendChild(container)
+    }
     // for (var k in data) {
     //   console.log("Key:" + k);
     //   console.log("Value:" + data[k]);
