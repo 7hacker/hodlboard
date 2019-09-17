@@ -12,13 +12,13 @@ app = Flask(__name__)
 @app.route('/content')
 def home():
 	data = {
-		'msg': "this is a message text",
+		'msg': "this is a message text from staging",
 		'key': "1234abcd",
 		'crypto': "btc",
 		'amt': 100
 	}
 	r = []
-	for i in range(13):
+	for i in range(5):
 		r.append(data)
 	response = app.response_class(
 		response=json.dumps(r),
