@@ -3,6 +3,7 @@ import logging
 import json
 
 from flask import Flask
+from flask_cors import cross_origin
 
 # Change the format of messages logged to Stackdriver
 logging.basicConfig(format='%(message)s', level=logging.INFO)
@@ -10,23 +11,22 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 app = Flask(__name__)
 
 @app.route('/content')
+@cross_origin(["staging.hodlboard.com"])
 def home():
 	data = {
-		'msg': "this is a message text from staging",
+		'msg': "this is a message text from staging-2",
 		'key': "1234abcd",
 		'crypto': "btc",
 		'amt': 100
 	}
 	r = []
-	for i in range(5):
+	for i in range(7):
 		r.append(data)
 	response = app.response_class(
 		response=json.dumps(r),
 		status=200,
 		mimetype='application/json'
 	)
-	response.headers['Access-Control-Allow-Origin'] = '*'
-
 	return response
 
 if __name__ == '__main__':

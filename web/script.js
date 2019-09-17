@@ -2,7 +2,7 @@
 var request = new XMLHttpRequest()
 
 // Open a new connection, using the GET request on the URL endpoint
-request.open('GET', 'http://api.staging.hodlboard.com/content', true)
+request.open('GET', 'https://api.staging.hodlboard.com/content', true)
 
 request.onload = function () {
   // Begin accessing JSON data here
