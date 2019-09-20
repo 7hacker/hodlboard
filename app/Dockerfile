@@ -20,7 +20,7 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN chmod 444 app.py
+RUN chmod 444 wsgi.py
 RUN chmod 444 requirements.txt
 
 # Service must listen to $PORT environment variable.
@@ -28,4 +28,4 @@ RUN chmod 444 requirements.txt
 ENV PORT 8080
 
 # Run the web service on container startup.
-CMD [ "python", "app.py" ]
+CMD [ "python", "wsgi.py" ]
