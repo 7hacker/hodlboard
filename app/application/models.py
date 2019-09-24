@@ -1,3 +1,5 @@
+from . import db
+
 class User(db.Model):
     """Model for user accounts."""
 
