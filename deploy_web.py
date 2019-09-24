@@ -24,6 +24,7 @@ def run_shell_cmd(cmd):
     Input: cmd, string
     Output: Tuple (True/False, empty-list/stderr-string-list)
     '''
+    print("Running %s" % cmd)
     proc = subprocess.Popen(cmd, shell=True,
                             stderr=subprocess.PIPE,
                             stdout=subprocess.PIPE)
@@ -49,7 +50,10 @@ def main(prod):
             sys.exit(0)
     else:
         print("Deploy to staging now...")
-        cmd = "gsutil rsync -x '\.DS_Store' -R web/ gs://staging.hodlboard.com"
+        cmd = "gsutil rsync "\
+              r"-x '\.DS_Store' -R "\
+              "web/ "\
+              "gs://staging.hodlboard.com"
         done, outlist = run_shell_cmd(cmd)
         if done:
             print("Completed")

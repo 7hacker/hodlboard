@@ -23,8 +23,8 @@ def create_app():
         app.config.from_object("config.Config")
 
     with app.app_context():
-        # Include our Routes
-        from . import routes
+        # Include our Routes, also instruct flake8 to ignore
+        from . import routes  # noqa: F401 isort:skip
         # Create tables for our models
         db.create_all()
         return app
