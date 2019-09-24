@@ -2,6 +2,7 @@ import argparse
 import sys
 import subprocess
 
+
 def yes_or_no(question):
     '''
     Asks a question on prompt, waits for y/n
@@ -15,6 +16,7 @@ def yes_or_no(question):
         return False
     else:
         return yes_or_no("Uhhhh... please enter ")
+
 
 def run_shell_cmd(cmd):
     '''
@@ -32,6 +34,7 @@ def run_shell_cmd(cmd):
         return (True, [])
     else:
         return (False, proc.stderr.readlines())
+
 
 def main(prod):
     '''
@@ -56,6 +59,7 @@ def main(prod):
                 print("FAILED!")
                 print(line)
                 sys.exit(1)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Deploy Static Site')

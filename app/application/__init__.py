@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 
@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 db = SQLAlchemy()
+
 
 def create_app():
     """Initialize the core application."""
@@ -20,7 +21,6 @@ def create_app():
         app.config.from_object("config.Local")
     else:
         app.config.from_object("config.Config")
-    #app.config.from_object('config.Config')
 
     with app.app_context():
         # Include our Routes

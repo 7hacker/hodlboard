@@ -1,35 +1,37 @@
 import json
-from flask import Flask, request, make_response
+from flask import request, make_response
 from flask_cors import cross_origin
 from flask import current_app as app
 from .models import db, User
 from datetime import datetime as dt
 
+
 @app.route('/content')
 @cross_origin(["staging.hodlboard.com"])
 def home():
-	data = {
-		'msg': "this is a message text from staging-2",
-		'key': "1234abcd",
-		'crypto': "btc",
-		'amt': 100
-	}
-	r = []
-	for i in range(7):
-		r.append(data)
-	response = app.response_class(
-		response=json.dumps(r),
-		status=200,
-		mimetype='application/json'
-	)
-	return response
+    data = {
+        'msg': "this is a message text from staging-2",
+        'key': "1234abcd",
+        'crypto': "btc",
+        'amt': 100
+    }
+    r = []
+    for i in range(7):
+        r.append(data)
+    response = app.response_class(
+        response=json.dumps(r),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
 
 @app.route('/')
 def hello():
     response = app.response_class(
-        response = json.dumps("hello world"),
-        status = 200,
-        mimetype = 'application/json'
+        response=json.dumps("hello world"),
+        status=200,
+        mimetype='application/json'
     )
     return response
 
@@ -43,7 +45,8 @@ def create_user():
         new_user = User(username=username,
                         email=email,
                         created=dt.now(),
-                        bio="In West Philadelphia born and raised, on the playground is where I spent most of my days",
+                        bio="In West Philadelphia born and raised, on the "
+                            "playground is where I spent most of my days",
                         admin=False)  # Create an instance of the User class
         db.session.add(new_user)  # Adds new User record to database
         db.session.commit()  # Commits all changes

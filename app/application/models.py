@@ -1,9 +1,12 @@
 from . import db
 
-class User(db.Model):
-    """Model for user accounts."""
 
-    __tablename__ = 'users'
+class CryptoKey(db.Model):
+    """
+    Model for crypto key accounts.
+    """
+
+    __tablename__ = 'CryptoKey'
     id = db.Column(db.Integer,
                    primary_key=True)
     username = db.Column(db.String(64),
