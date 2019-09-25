@@ -1,5 +1,5 @@
 import json
-from flask import request, make_response
+from flask import request, make_response, abort
 from flask_cors import cross_origin
 from flask import current_app as app
 from .models import db
@@ -34,6 +34,23 @@ def hello():
         mimetype='application/json'
     )
     return response
+
+
+@app.route('/message', methods=['POST'])
+def create_signed_message():
+    """
+    Create a Signed Message Object
+    """
+    if not request.json or not 'message' in request.json:
+        abort(400)
+
+    m = request.json['message']
+    key = m['address']
+    signature = m['signature']
+    message = m['message']
+    if verify_cryptokey(key, 'bitcoin')
+        and verify_signature(key, signature, message):
+        #Create a key and signed message
 
 
 '''
