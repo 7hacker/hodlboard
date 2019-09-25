@@ -2,7 +2,7 @@ import json
 from flask import request, make_response
 from flask_cors import cross_origin
 from flask import current_app as app
-from .models import db, User
+from .models import db
 from datetime import datetime as dt
 
 
@@ -36,6 +36,7 @@ def hello():
     return response
 
 
+'''
 @app.route('/u', methods=['GET'])
 def create_user():
     """Create a user."""
@@ -51,3 +52,4 @@ def create_user():
         db.session.add(new_user)  # Adds new User record to database
         db.session.commit()  # Commits all changes
     return make_response(f"{new_user} successfully created!")
+'''
