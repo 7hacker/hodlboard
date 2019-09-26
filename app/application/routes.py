@@ -47,7 +47,9 @@ def create_signed_message():
 
     # Create a crypto key if it does not exist
     ck = db.session.query(CryptoKey).\
-        filter(CryptoKey.public_address == m['address'])
+        filter(CryptoKey.public_address == m['address']).\
+        first()
+    print(ck)
     if not ck:
         ck = CryptoKey(public_address=m['address'],
                        created=dt.now(),
@@ -55,8 +57,6 @@ def create_signed_message():
                        testnet=False)
         db.session.add(ck)
         db.session.commit()
-    else:
-        ck = ck[0]
     # Create a signed message
     new_sm = SignedMessage(message=m['message'],
                            signature=m['signature'],
