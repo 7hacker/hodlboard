@@ -2,7 +2,7 @@ import json
 from flask import request, make_response, abort
 from flask_cors import cross_origin
 from flask import current_app as app
-from .models import db
+from models import db, CryptoKey, SignedMessage
 from datetime import datetime as dt
 
 
@@ -41,17 +41,28 @@ def create_signed_message():
     """
     Create a Signed Message Object
     """
-    if not request.json or not 'message' in request.json:
+    if not request.json or 'message' not in request.json:
         abort(400)
 
+    # Create a crypto key
     m = request.json['message']
-    key = m['address']
-    signature = m['signature']
-    message = m['message']
-    if verify_cryptokey(key, 'bitcoin')
-        and verify_signature(key, signature, message):
-        #Create a key and signed message
+    new_ck = CryptoKey(public_address=m['address'],
+                       created=dt.now(),
+                       network="bitcoin",
+                       testnet=False)
+    db.session.add(new_ck)
+    db.session.commit()
+    # Create a signed message
+    new_sm = SignedMessage(message=m['message'],
+                           signature=m['signature'],
+                           created=dt.now(),
+                           cryptokey=new_ck,
+                           hodl_time_days=100,
+                           crypto_value=100.123456789)
+    db.session.add(new_sm)
+    db.session.commit()
 
+    return make_response(f"{new_sm} successfully created!")
 
 '''
 @app.route('/u', methods=['GET'])

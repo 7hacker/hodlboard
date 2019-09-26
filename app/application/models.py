@@ -8,7 +8,7 @@ class CryptoKey(db.Model):
     """
 
     __tablename__ = 'CryptoKey'
-    public_address = db.Column(db.String(64),
+    public_address = db.Column(db.String(256),
                                index=False,
                                unique=True,
                                nullable=False,
@@ -51,7 +51,7 @@ class SignedMessage(db.Model):
                         unique=False,
                         nullable=False)
     # Foreign Key to CryptoKey
-    cryptokey = db.Column(db.String(64),
+    cryptokey = db.Column(db.String(256),
                           db.ForeignKey('CryptoKey.public_address'))
     hodl_time_days = db.Column(db.Integer,
                                index=False,
