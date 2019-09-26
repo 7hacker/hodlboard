@@ -57,7 +57,7 @@ class SignedMessage(db.Model):
                                index=False,
                                unique=False,
                                nullable=False)
-    crypto_value = db.Column(db.Float,
+    crypto_value = db.Column(db.Numeric,
                              index=False,
                              unique=False,
                              nullable=False)
