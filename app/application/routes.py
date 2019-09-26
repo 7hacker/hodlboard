@@ -43,20 +43,25 @@ def create_signed_message():
     """
     if not request.json or 'message' not in request.json:
         abort(400)
-
-    # Create a crypto key
     m = request.json['message']
-    new_ck = CryptoKey(public_address=m['address'],
+
+    # Create a crypto key if it does not exist
+    ck = db.session.query(CryptoKey).\
+        filter(CryptoKey.public_address == m['address'])
+    if not ck:
+        ck = CryptoKey(public_address=m['address'],
                        created=dt.now(),
                        network="bitcoin",
                        testnet=False)
-    db.session.add(new_ck)
-    db.session.commit()
+        db.session.add(ck)
+        db.session.commit()
+    else:
+        ck = ck[0]
     # Create a signed message
     new_sm = SignedMessage(message=m['message'],
                            signature=m['signature'],
                            created=dt.now(),
-                           cryptokey=new_ck.public_address,
+                           cryptokey=ck.public_address,
                            hodl_time_days=100,
                            crypto_value=100.123456789)
     db.session.add(new_sm)
