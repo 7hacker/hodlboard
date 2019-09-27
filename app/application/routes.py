@@ -39,34 +39,50 @@ def hello():
     return response
 
 
-@app.route('/message', methods=['POST'])
-def create_signed_message():
-    """
-    Create a Signed Message Object
-    """
-    if not request.json or 'message' not in request.json:
-        abort(400)
-    m = request.json['message']
+@app.route('/message', methods=['POST', 'GET'])
+def handle_message_request():
+    if request.method == 'POST':
+        """
+        Create a Signed Message Object
+        """
+        if not request.json or 'message' not in request.json:
+            abort(400)
+        m = request.json['message']
 
-    # Create a crypto key if it does not exist
-    ck = db.session.query(CryptoKey).\
-        filter(CryptoKey.public_address == m['address']).\
-        first()
-    if not ck:
-        ck = CryptoKey(public_address=m['address'],
-                       created=dt.now(),
-                       network="bitcoin",
-                       testnet=False)
-        db.session.add(ck)
-        db.session.commit()
-    # Create a signed message
-    new_sm = SignedMessage(message=m['message'],
-                           signature=m['signature'],
+        # Create a crypto key if it does not exist
+        ck = db.session.query(CryptoKey).\
+            filter(CryptoKey.public_address == m['address']).\
+            first()
+        if not ck:
+            ck = CryptoKey(public_address=m['address'],
                            created=dt.now(),
-                           cryptokey=ck.public_address,
-                           hodl_time_days=100,
-                           crypto_value=Decimal("123456789.123456786"))
-    db.session.add(new_sm)
-    db.session.commit()
+                           network="bitcoin",
+                           testnet=False)
+            db.session.add(ck)
+            db.session.commit()
+        # Create a signed message
+        new_sm = SignedMessage(message=m['message'],
+                               signature=m['signature'],
+                               created=dt.now(),
+                               cryptokey=ck.public_address,
+                               hodl_time_days=100,
+                               crypto_value=Decimal("123456789.123456786"))
+        db.session.add(new_sm)
+        db.session.commit()
 
-    return make_response(f"{new_sm} successfully created!")
+        return make_response(f"{new_sm} successfully created!")
+    else:
+        """
+        Return signed messages
+        """
+        messages = db.session.query(SignedMessage).all()
+        d = {}
+        for m in messages:
+            #Iterate over the messages
+
+        response = app.response_class(
+            response=json.dumps(messages),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
