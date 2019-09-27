@@ -1,4 +1,3 @@
-from sqlalchemy.orm import relationship
 from . import db as db
 
 
@@ -25,7 +24,7 @@ class CryptoKey(db.Model):
                         index=False,
                         unique=False,
                         nullable=False)
-    messages = relationship("SignedMessage", backref="messages")
+    messages = db.relationship("SignedMessage", backref="messages")
 
     def __repr__(self):
         return '<CryptoKey {}>'.format(self.public_address)
@@ -36,7 +35,7 @@ class SignedMessage(db.Model):
     Model for signed messages.
     """
     __tablename__ = 'SignedMessage'
-    id = db.Column(db.Integer,
+    id = db.Column(db.BigInteger,
                    primary_key=True)
     message = db.Column(db.Text,
                         index=False,
@@ -53,11 +52,12 @@ class SignedMessage(db.Model):
     # Foreign Key to CryptoKey
     cryptokey = db.Column(db.String(256),
                           db.ForeignKey('CryptoKey.public_address'))
-    hodl_time_days = db.Column(db.Integer,
+    hodl_time_days = db.Column(db.BigInteger,
                                index=False,
                                unique=False,
                                nullable=False)
-    crypto_value = db.Column(db.Numeric,
+    # precision- digits, scale- digits after decimal point
+    crypto_value = db.Column(db.Numeric(precision=32, scale=12),
                              index=False,
                              unique=False,
                              nullable=False)

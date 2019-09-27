@@ -1,9 +1,12 @@
 import json
+from decimal import Decimal
+from datetime import datetime as dt
+
 from flask import request, make_response, abort
 from flask_cors import cross_origin
 from flask import current_app as app
+
 from .models import db, CryptoKey, SignedMessage
-from datetime import datetime as dt
 
 
 @app.route('/content')
@@ -49,7 +52,6 @@ def create_signed_message():
     ck = db.session.query(CryptoKey).\
         filter(CryptoKey.public_address == m['address']).\
         first()
-    print(ck)
     if not ck:
         ck = CryptoKey(public_address=m['address'],
                        created=dt.now(),
@@ -63,7 +65,7 @@ def create_signed_message():
                            created=dt.now(),
                            cryptokey=ck.public_address,
                            hodl_time_days=100,
-                           crypto_value=100.123456789)
+                           crypto_value=Decimal("123456789.123456786"))
     db.session.add(new_sm)
     db.session.commit()
 
