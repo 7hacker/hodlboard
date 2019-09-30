@@ -1,4 +1,5 @@
 import json
+import simplejson as simplejson
 from decimal import Decimal
 from datetime import datetime as dt
 
@@ -39,6 +40,20 @@ def hello():
     return response
 
 
+'''
+Sample POST
+{
+    "message": {
+    "address": "abcd1234",
+    "message": "hello hodlboard-1",
+    "signature": "hxllx hxdlxxard-x1",
+    "show_hodl_time": true,
+    "show_crypto_value": true
+    }
+}
+'''
+
+
 @app.route('/message', methods=['POST', 'GET'])
 def handle_message_request():
     if request.method == 'POST':
@@ -66,7 +81,10 @@ def handle_message_request():
                                created=dt.now(),
                                cryptokey=ck.public_address,
                                hodl_time_days=100,
-                               crypto_value=Decimal("123456789.123456786"))
+                               crypto_value=Decimal("123456789.123456786"),
+                               show_hodl_time=m["show_hodl_time"],
+                               show_crypto_value=m["show_crypto_value"],
+                               view_count=0)
         db.session.add(new_sm)
         db.session.commit()
 
@@ -78,10 +96,20 @@ def handle_message_request():
         messages = db.session.query(SignedMessage).all()
         d = {}
         for m in messages:
-            #Iterate over the messages
-
+            # Iterate over the messages
+            d[m.id] = {
+                "message": m.message,
+                "created": "{} {} {}".format(m.created.day,
+                                             m.created.month,
+                                             m.created.year),
+                "views": m.view_count
+            }
+            if m.show_hodl_time:
+                d[m.id]["hold_days"] = m.hodl_time_days
+            if m.show_crypto_value:
+                d[m.id]["crypto_value"] = m.crypto_value
         response = app.response_class(
-            response=json.dumps(messages),
+            response=simplejson.dumps(d),
             status=200,
             mimetype='application/json'
         )

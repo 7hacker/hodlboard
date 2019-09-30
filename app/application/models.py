@@ -56,11 +56,23 @@ class SignedMessage(db.Model):
                                index=False,
                                unique=False,
                                nullable=False)
+    show_hodl_time = db.Column(db.Boolean,
+                               index=False,
+                               unique=False,
+                               nullable=False)
     # precision- digits, scale- digits after decimal point
     crypto_value = db.Column(db.Numeric(precision=32, scale=12),
                              index=False,
                              unique=False,
                              nullable=False)
+    show_crypto_value = db.Column(db.Boolean,
+                                  index=False,
+                                  unique=False,
+                                  nullable=False)
+    view_count = db.Column(db.Integer,
+                           index=False,
+                           unique=False,
+                           nullable=True)
 
     def __repr__(self):
         return '<SignedMessage {}>'.format(self.id)
