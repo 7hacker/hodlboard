@@ -1,9 +1,8 @@
-import json
-import simplejson as simplejson
+import simplejson as json
 from decimal import Decimal
 from datetime import datetime as dt
 
-from flask import request, make_response, abort
+from flask import request, make_response
 from flask_cors import cross_origin
 from flask import current_app as app
 
@@ -55,6 +54,7 @@ Sample POST
 
 
 @app.route('/message', methods=['POST', 'GET'])
+@cross_origin(["0.0.0.0"])
 def handle_message_request():
     if request.method == 'POST':
         """
@@ -86,8 +86,10 @@ def handle_message_request():
                                cryptokey=ck.public_address,
                                hodl_time_days=100,
                                crypto_value=Decimal("123456789.123456786"),
-                               show_hodl_time=True if hodl_flag else False,
-                               show_crypto_value=True if currency_value_flag else False,
+                               show_hodl_time=(True if hodl_flag
+                                               else False),
+                               show_crypto_value=(True if currency_value_flag
+                                                  else False),
                                view_count=0)
         db.session.add(new_sm)
         db.session.commit()
@@ -113,7 +115,7 @@ def handle_message_request():
             if m.show_crypto_value:
                 d[m.id]["crypto_value"] = m.crypto_value
         response = app.response_class(
-            response=simplejson.dumps(d),
+            response=json.dumps(d),
             status=200,
             mimetype='application/json'
         )
