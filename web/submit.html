@@ -43,11 +43,28 @@
       </div>
 
       <div class="content" id="content">
-        <form action='' method='get' class='submit-form'>
+        <form action='' method='post' class='submit-form'>
           <div class='form-row'>
-            <label for='full-name'>Name</label>
-            <input id='full-name' name='full-name' type='text'/>
+            <label for='Message'>Message</label>
+            <input id='message' name='message' type='text'/>
           </div>
+          <div class='form-row'>
+            <label for='signature'>Message Signature</label>
+            <input id='signature' name='signature' type='text'/>
+          </div>
+          <div class='form-row'>
+            <label for='Address'>Public Address</label>
+            <input id='address' name='address' type='text'/>
+          </div>
+          <div class='form-row'>
+            <label for='HODL-Time'>Show HODL time?</label>
+            <input id='hodl-time' name='hodl-time' type='checkbox'/>
+          </div>
+          <div class='form-row'>
+            <label for='Currency-value'>Show Currency Amount?</label>
+            <input id='currency-value' name='currency-value' type='checkbox'/>
+          </div>
+          <button name="submit" value="submit">Submit</button>
         </form>
 
       </div>
