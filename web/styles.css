@@ -28,6 +28,17 @@
   flex-direction: row;
 }
 
+.form-row {
+  flex-direction: row;
+  align-items: flex-start; /* To avoid stretching */
+  margin-bottom: 20px;
+}
+
+.form-row input[type='text'] {
+  width: 500px;
+  height: initial;
+}
+
 .content {
     margin-top: 20px;
     border: 1px solid #00ff43;
