@@ -60,9 +60,7 @@ def handle_message_request():
         """
         Create a Signed Message Object
         """
-        if not request.json or 'message' not in request.json:
-            abort(400)
-        m = request.json['message']
+        m = request.form
 
         # Create a crypto key if it does not exist
         ck = db.session.query(CryptoKey).\
@@ -76,14 +74,20 @@ def handle_message_request():
             db.session.add(ck)
             db.session.commit()
         # Create a signed message
+        hodl_flag = False
+        currency_value_flag = False
+        if "hodl-time" in m:
+            hodl_flag = True
+        if "currency-value" in m:
+            currency_value_flag = True
         new_sm = SignedMessage(message=m['message'],
                                signature=m['signature'],
                                created=dt.now(),
                                cryptokey=ck.public_address,
                                hodl_time_days=100,
                                crypto_value=Decimal("123456789.123456786"),
-                               show_hodl_time=m["show_hodl_time"],
-                               show_crypto_value=m["show_crypto_value"],
+                               show_hodl_time=True if hodl_flag else False,
+                               show_crypto_value=True if currency_value_flag else False,
                                view_count=0)
         db.session.add(new_sm)
         db.session.commit()
